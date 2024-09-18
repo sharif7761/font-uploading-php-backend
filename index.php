@@ -1,4 +1,21 @@
 <?php
+header("Access-Control-Allow-Origin: http://localhost:5173");
+
+// Allow the following HTTP methods
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+
+// Allow the following headers
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
+
+// Handle preflight requests
+if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+    http_response_code(200);
+    exit;
+}
+header("Access-Control-Allow-Origin: http://localhost:5173");
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 // Include database connection
 include('db.php');
 
