@@ -1,6 +1,5 @@
 <?php
 include 'cors.php';
-
 include('db.php');
 
 $sql = "SELECT * FROM fonts ORDER BY created_at DESC";

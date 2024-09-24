@@ -1,16 +1,5 @@
 <?php
 include 'cors.php';
-
-if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
-    http_response_code(204); // Preflight response
-    exit();
-}
-
-if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
-    http_response_code(200);
-    exit;
-}
-
 include('db.php');
 
 $data = json_decode(file_get_contents('php://input'), true);
