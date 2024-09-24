@@ -11,7 +11,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 include('db.php');
 
 if (isset($_FILES['fontFile'])) {
-    $groupName = $_POST['groupName'];
     $file = $_FILES['fontFile'];
 
     $fileExtension = pathinfo($file['name'], PATHINFO_EXTENSION);
@@ -27,9 +26,9 @@ if (isset($_FILES['fontFile'])) {
 
     $filePath = $uploadDir . basename($file['name']);
     if (move_uploaded_file($file['tmp_name'], $filePath)) {
-        $sql = "INSERT INTO fonts (group_name, font_name, font_path) VALUES (?, ?, ?)";
+        $sql = "INSERT INTO fonts (font_name, font_path) VALUES (?, ?)";
         $stmt = $pdo->prepare($sql);
-        $stmt->execute([$groupName, $file['name'], $filePath]);
+        $stmt->execute([$file['name'], $filePath]);
 
         echo json_encode(['success' => true, 'message' => 'Font uploaded successfully!']);
     } else {

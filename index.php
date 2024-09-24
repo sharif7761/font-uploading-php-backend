@@ -21,7 +21,6 @@ include('db.php');
 
 // Handle file upload and store information in the database
 if (isset($_FILES['fontFile'])) {
-    $groupName = $_POST['groupName'];
     $file = $_FILES['fontFile'];
 
     // Ensure the file is a .ttf file
@@ -40,9 +39,9 @@ if (isset($_FILES['fontFile'])) {
     $filePath = $uploadDir . basename($file['name']);
     if (move_uploaded_file($file['tmp_name'], $filePath)) {
         // Save the font info into the database
-        $sql = "INSERT INTO font_groups (group_name, font_name, font_path) VALUES (?, ?, ?)";
+        $sql = "INSERT INTO font_groups (font_name, font_path) VALUES (?, ?)";
         $stmt = $pdo->prepare($sql);
-        $stmt->execute([$groupName, $file['name'], $filePath]);
+        $stmt->execute([$file['name'], $filePath]);
 
         echo json_encode(['success' => true, 'message' => 'Font uploaded successfully!']);
     } else {
