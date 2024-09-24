@@ -34,18 +34,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
                 $deleteFontStmt->execute();
 
                 $pdo->commit();
-                echo json_encode(['message' => 'Font and related data deleted successfully']);
+                echo json_encode(['message' => 'Font and related data deleted successfully', 'status' => true]);
             } else {
-                echo json_encode(['message' => 'Font not found']);
+                echo json_encode(['message' => 'Font not found', 'status' => false]);
             }
         } catch (PDOException $e) {
             $pdo->rollBack();
-            echo json_encode(['message' => 'Error: ' . $e->getMessage()]);
+            echo json_encode(['message' => 'Error: ' . $e->getMessage(), 'status' => false]);
         }
     } else {
-        echo json_encode(['message' => 'Font ID is required']);
+        echo json_encode(['message' => 'Font ID is required', 'status' => false]);
     }
 } else {
-    echo json_encode(['message' => 'Invalid request method']);
+    echo json_encode(['message' => 'Invalid request method', 'status' => false]);
 }
 ?>
