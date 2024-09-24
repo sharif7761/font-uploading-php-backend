@@ -21,17 +21,14 @@ if (count($fontIds) < 2) {
     exit;
 }
 
-// Update font group name
 $sql = "UPDATE font_groups SET group_name = ? WHERE id = ?";
 $stmt = $pdo->prepare($sql);
 $stmt->execute([$groupName, $groupId]);
 
-// Clear existing fonts
 $sql = "DELETE FROM font_group_details WHERE font_group_id = ?";
 $stmt = $pdo->prepare($sql);
 $stmt->execute([$groupId]);
 
-// Insert new fonts
 $sql = "INSERT INTO font_group_details (font_group_id, font_id) VALUES (?, ?)";
 $stmt = $pdo->prepare($sql);
 foreach ($fontIds as $fontId) {

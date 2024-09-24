@@ -13,12 +13,10 @@ include('db.php');
 $data = json_decode(file_get_contents('php://input'), true);
 $groupId = $data['groupId'];
 
-// Delete from font_group_details
 $sql = "DELETE FROM font_group_details WHERE font_group_id = ?";
 $stmt = $pdo->prepare($sql);
 $stmt->execute([$groupId]);
 
-// Delete from font_groups
 $sql = "DELETE FROM font_groups WHERE id = ?";
 $stmt = $pdo->prepare($sql);
 $stmt->execute([$groupId]);

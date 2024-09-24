@@ -20,13 +20,11 @@ if (count($fontIds) < 2) {
     exit;
 }
 
-// Insert into font_groups
 $sql = "INSERT INTO font_groups (group_name) VALUES (?)";
 $stmt = $pdo->prepare($sql);
 $stmt->execute([$groupName]);
 $groupId = $pdo->lastInsertId();
 
-// Insert into font_group_details
 $sql = "INSERT INTO font_group_details (font_group_id, font_id) VALUES (?, ?)";
 $stmt = $pdo->prepare($sql);
 foreach ($fontIds as $fontId) {
